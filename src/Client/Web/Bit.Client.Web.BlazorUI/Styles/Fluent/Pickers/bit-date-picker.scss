@@ -1,0 +1,11 @@
+﻿@import "../colors.fluent.scss", "../../functions.scss";
+.bit-dtp {
+    font-family: FluentFont;
+    -webkit-font-smoothing: antialiased;
+    font-size: rem(18px);
+    font-weight: 400;
+    box-shadow: none;
+    margin: em(0px);
+    padding: em(0px);
+    box-sizing: border-box;
+}
