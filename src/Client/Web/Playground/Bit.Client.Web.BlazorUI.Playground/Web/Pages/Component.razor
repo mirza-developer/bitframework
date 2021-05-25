@@ -1,20 +1,4 @@
 ﻿@page "/component"
-<style>
-    /* Temp Styles */
-    .links-container, .checkboxes-container, .labels-container, .search-box-container {
-        font-family: FluentFont;
-    }
-
-        .links-container p {
-            width: 95%;
-            margin: auto;
-        }
-
-    .custom-button {
-        background-color: palevioletred;
-    }
-</style>
-
 <h1>Bit Components</h1>
 
 <hr />
@@ -51,7 +35,7 @@
     <BitButton IsEnabled="false">
         Disabled
     </BitButton>
-    <BitButton IsEnabled="false">
+    <BitButton IsEnabled="false" AllowDisabledFocus="false">
         <label>This text is from a label element</label>
     </BitButton>
 
@@ -60,19 +44,69 @@
     <h3>BitCompoundButton</h3>
     <BitCompoundButton IsEnabled="true"
                        Text="Primary"
+                       AriaLabel="Detailed label used for screen reader."
                        SecondaryText="This Button is compound button">
     </BitCompoundButton>
     <BitCompoundButton IsEnabled="true"
                        Text="Standard"
+                       AriaHidden="true"
                        SecondaryText="This Button is compound button"
                        ButtonStyle="ButtonStyle.Standard">
     </BitCompoundButton>
     <BitCompoundButton IsEnabled="false"
+                       AllowDisabledFocus="false"
                        Text="Disabled"
+                       AriaDescription="Detailed description used for screen reader."
                        SecondaryText="This Button is a disabled compound button">
     </BitCompoundButton>
+
     <hr />
+
+    <h3>Button with Aria for Screen Reader</h3>
+    <BitButton AriaDescription="Detailed description used for screen reader.">
+        Button with Aria Description
+    </BitButton>
+    <BitButton AriaLabel="Detailed label used for screen reader.">
+        Button with Aria Label
+    </BitButton>
+    <BitButton AriaHidden="true">
+        Button with Aria Hidden
+    </BitButton>
+
+    <hr />
+
+    <h3>Icon Button</h3>
+    <BitIconButton IconName="Emoji2" />
+    <BitIconButton IconName="Emoji2" IsEnabled="false" />
+
+    <hr />
+
+    <h3>Icon Button with Tooltip</h3>
+    <BitIconButton IconName="Emoji2" ToolTip="I'm Happy" />
+
+    <hr />
+
+    <h3>Action Button</h3>
+    <div class="action-btn-container">
+        <BitActionButton IconName="AddFriend">Create account</BitActionButton>
+        <BitActionButton AllowDisabledFocus="false" IsEnabled="false" IconName="UserRemove">Remove user</BitActionButton>
+    </div>
+
+    <hr />
+
+    <h3>Button-like Anchor</h3>
+    <BitButton Title="Primary" Target="_blank" Href="https://github.com/bitfoundation/bitframework">
+        Open Bit Foundation In New Tab
+    </BitButton>
+    <BitButton Title="Standard" Href="https://github.com/bitfoundation/bitframework" ButtonStyle="ButtonStyle.Standard">
+        Go To Bit Foundation
+    </BitButton>
+    <BitButton Target="_self" Href="https://github.com/bitfoundation/bitframework" IsEnabled="false">
+        <span>Bit Foundation From Span</span>
+    </BitButton>
 </div>
+
+<hr />
 
 <div class="labels-container">
 
@@ -85,6 +119,9 @@
     <input type="text" name="labels-container__input" id="labels-container__input" />
     <hr />
 </div>
+
+<hr />
+
 <div class="links-container">
     <h3>Links</h3>
     <p>
@@ -99,20 +136,28 @@
     </p>
     <hr />
 </div>
+
+<hr />
+
 <div class="message-bar-container">
     <h2>BitMessageBar</h2>
     @if (IsMessageBarHidden is false)
     {
-        <BitMessageBar MessageBarStyle="@MessageBarStyle.Success">
-            Action completed! <BitButton OnClick="MessageBarButton" ButtonStyle="ButtonStyle.Standard">OK</BitButton>
+        <BitMessageBar MessageBarStyle="@MessageBarStyle.Success" OnDismiss="HideMessageBar">
+            Action completed! This is a sample of message bar with dismiss ability
         </BitMessageBar>
-        <br />}
-    <BitMessageBar MessageBarStyle="@MessageBarStyle.Error">
-        Error! Cannot complete action
+        <br />
+    }
+    <BitMessageBar MessageBarStyle="@MessageBarStyle.Error" Truncated="true">
+        This is an error message bar with the ability to truncate your text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </BitMessageBar>
     <br />
-    <BitMessageBar MessageBarStyle="@MessageBarStyle.Warning">
-        Caution! Action may takes long time
+    <BitMessageBar MessageBarStyle="@MessageBarStyle.Warning" IsMultiline="true">
+        Caution! Action may takes long and also this message bar shown multiline messages time Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </BitMessageBar>
+    <br />
+    <BitMessageBar MessageBarStyle="@MessageBarStyle.Blocked">
+        Blocked MessageBar - single line Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </BitMessageBar>
     <br />
     <BitMessageBar MessageBarStyle="@MessageBarStyle.Severe">
@@ -130,17 +175,17 @@
 
     <h2>Checkboxes</h2>
     <h3>Basics</h3>
-    <BitCheckbox>Basic Checkbox</BitCheckbox>
+    <BitCheckbox @bind-IsChecked="IsCheckBoxChecked">Basic Checkbox</BitCheckbox>
     <BitCheckbox IsChecked="true">Checked Checkbox</BitCheckbox>
     <BitCheckbox IsEnabled="false">Disable Checkbox</BitCheckbox>
     <BitCheckbox IsEnabled="false" IsChecked="true">Disable Checked Checkbox</BitCheckbox>
     <br />
     <h3>Indeterminate</h3>
-    <BitCheckbox IsIndeterminate="true">Indeterminated checkbox</BitCheckbox>
-    <BitCheckbox IsIndeterminate="true" IsChecked="true">Indeterminate checkbox which defaults to true when clicked</BitCheckbox>
+    <BitCheckbox @bind-IsIndeterminate="IsCheckBoxIndeterminate" @bind-IsChecked="IsCheckBoxChecked">Indeterminated checkbox</BitCheckbox>
+    <BitCheckbox IsIndeterminate="true">Indeterminate checkbox</BitCheckbox>
     <BitCheckbox IsIndeterminate="true" IsEnabled="false">Disabled indeterminated checkbox</BitCheckbox>
-    <BitCheckbox IsIndeterminate="IsCheckBoxIndeterminate">Controlled indeterminated checkbox</BitCheckbox>
-    <BitButton OnClick="() => IsCheckBoxIndeterminate = true">Make Checkbox Indeterminate</BitButton>
+    <BitCheckbox @bind-IsIndeterminate="IsCheckBoxIndeterminateInCode" @bind-IsChecked="IsCheckBoxChecked">Controlled indeterminated checkbox</BitCheckbox>
+    <BitButton OnClick="() => IsCheckBoxIndeterminateInCode = true">Make Checkbox Indeterminate</BitButton>
     <br />
     <h5>Custom Label</h5>
     <BitCheckbox>
@@ -160,6 +205,7 @@
 </div>
 
 <hr />
+
 <div class="search-box-container">
     <h3>SearchBox</h3>
     <h5>Default SearchBox</h5>
@@ -180,6 +226,7 @@
     <BitSearchBox Placeholder="Search" Width="250px"></BitSearchBox>
     <br />
 </div>
+
 <hr />
 
 <div class="text-field-container">
@@ -194,8 +241,9 @@
     <br />
     <BitTextField MaxLength="10" Placeholder="Limited text field - 10 chars"></BitTextField>
     <br />
-    <BitTextField Type="@InputType" Placeholder="Password input"></BitTextField>
-    <BitButton ButtonStyle="@ButtonStyle.Standard" OnClick="ChangeInputType">@ShowPasswordText</BitButton>
+    <BitTextField Placeholder="With an icon" IconName="CalendarMirrored"></BitTextField>
+    <br />
+    <BitTextField Type="@InputType" Placeholder="Password input" CanRevealPassword="true"></BitTextField>
     <br />
     <h3>Multi-line</h3>
     <BitTextField IsMultiLine="true" Value="Multi-line text field"></BitTextField>
@@ -204,7 +252,67 @@
     <br />
     <BitTextField IsMultiLine="true" IsEnabled="false" Value="Multi-line Disabled"></BitTextField>
 </div>
+
 <hr />
+
+<div class="spinner-container">
+    <h2>Spinner</h2>
+    <div>
+        <span>Extra small spinner:</span>
+        <BitSpinner Size="SpinnerSize.XSmall" />
+    </div>
+    <br />
+    <div>
+        <span>Small spinner:</span>
+        <BitSpinner Size="SpinnerSize.Small" />
+    </div>
+    <br />
+    <div>
+        <span>Medium spinner:</span>
+        <BitSpinner Size="SpinnerSize.Medium" />
+    </div>
+    <br />
+    <div>
+        <span>Large spinner:</span>
+        <BitSpinner Size="SpinnerSize.Large" />
+    </div>
+    <br />
+    <div class="spinner-positioning">
+        <h3>Spinner label positioning</h3>
+        <span>Spinner with label positioned below</span>
+        <BitSpinner LabelPosition="SpinnerLabelPosition.Bottom" Label="I am definitely loading..." />
+        <br />
+        <span>Spinner with label positioned above</span>
+        <BitSpinner LabelPosition="SpinnerLabelPosition.Top" Label="Seriously, still loading..." />
+        <br />
+        <span>Spinner with label positioned to right</span>
+        <BitSpinner LabelPosition="SpinnerLabelPosition.Right" Label="Wait, wait..." />
+        <br />
+        <span>Spinner with label positioned to left</span>
+        <BitSpinner LabelPosition="SpinnerLabelPosition.Left" Label="Nope, still loading..." />
+    </div>
+</div>
+
+<hr />
+
+<div class="rating-container">
+    <h2>Rating</h2>
+    <h5>Large stars</h5>
+    <BitRating DefaultRating="5" Size="RatingSize.Large" />
+    <h5>Small stars, with 0 stars allowed</h5>
+    <BitRating AllowZeroStars="true" />
+    <h5>10 small stars</h5>
+    <BitRating Max="10" />
+    <h5>Disabled</h5>
+    <BitRating DefaultRating="5" IsEnabled="false" />
+    <h5>ReadOnly</h5>
+    <BitRating DefaultRating="5" IsReadonly="true" />
+    <h5>Custom icons</h5>
+    <BitRating Icon="HeartFill" UnselectedIcon="Heart" />
+</div>
+
+<hr />
+
 <div class="choice-container">
     <h2>BitChoiceGroup & BitChoiceOption</h2>
     <br />
@@ -221,4 +329,39 @@
         <BitChoiceOption Text="Option2" Value="2"></BitChoiceOption>
         <BitChoiceOption Text="Disabled option" Value="3" IsEnabled="false"></BitChoiceOption>
     </BitChoiceGroup>
+</div>
+
+<hr />
+
+<div class="toggle-container">
+    <h2>BitToggle</h2>
+    <h3>Basics</h3>
+
+    <BitToggle @bind-IsChecked="IsToggleChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and checked</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and unchecked</BitToggle>
+    <br />
+    <BitToggle IsChecked="true" IsEnabled="false" OnText="On" OffText="Off">Disabled and checked</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" OnText="On" OffText="Off">Disabled and unchecked</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" IsInlineLabel="true" OnText="On" OffText="Off">With inline label</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" IsInlineLabel="true" OnText="On" OffText="Off">Disabled with inline label</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" IsInlineLabel="true">With inline label and without onText and offText</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" IsInlineLabel="true">Disabled With inline label and without onText and offText</BitToggle>
+    <br />
+    <h3>Toggles with Custom Labels</h3>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off">Custom label <i class="bit-icon bit-icon--Info"></i></BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off" IsInlineLabel="true">Custom inline label <i class="bit-icon bit-icon--Info"></i></BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and checked</BitToggle>
+    <br />
+    <BitButton OnClick="() => IsToggleChecked = true">Make Toggle Check</BitButton>
+    <br />
+    <br />
 </div>

@@ -28,7 +28,7 @@ namespace Bit.Client.Web.BlazorUI
         [Parameter] public EventCallback<ChangeEventArgs> OnChange { get; set; }
 
         [CascadingParameter] protected BitChoiceGroup ChoiceGroup { get; set; }
-      
+
         public override Task SetParametersAsync(ParameterView parameters)
         {
             foreach (ParameterValue parameter in parameters)
@@ -61,14 +61,16 @@ namespace Bit.Client.Web.BlazorUI
 
             return base.SetParametersAsync(parameters);
         }
-       
+
         protected override Task OnInitializedAsync()
         {
             if (ChoiceGroup is not null)
             {
                 ChoiceGroup.RegisterOption(this);
                 if (string.IsNullOrEmpty(Name))
+                {
                     Name = ChoiceGroup.Name;
+                }
             }
             return base.OnInitializedAsync();
         }
@@ -77,8 +79,9 @@ namespace Bit.Client.Web.BlazorUI
 
         protected override void RegisterComponentClasses()
         {
-            ClassBuilder.Register(() => IsChecked is true ? 
-                $"{RootElementClass}-checked-{VisualClassRegistrar()}" : string.Empty);
+            ClassBuilder.Register(() => IsChecked is false
+                ? string.Empty
+                : $"{RootElementClass}-checked-{VisualClassRegistrar()}");
         }
 
         protected virtual async Task HandleClick(MouseEventArgs e)
@@ -86,7 +89,9 @@ namespace Bit.Client.Web.BlazorUI
             if (IsEnabled)
             {
                 if (ChoiceGroup is not null)
+                {
                     await ChoiceGroup.ChangeSelection(this);
+                }
                 await OnClick.InvokeAsync(e);
             }
         }
@@ -108,7 +113,9 @@ namespace Bit.Client.Web.BlazorUI
         public void Dispose()
         {
             if (ChoiceGroup is not null)
-                ChoiceGroup.UnregisterRadio(this);
+            {
+                ChoiceGroup.UnregisterOption(this);
+            }
         }
     }
 }

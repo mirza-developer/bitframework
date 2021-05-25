@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -15,7 +14,7 @@ namespace Bit.Client.Web.BlazorUI
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
-        protected override string RootElementClass => Href.HasValue() || !IsEnabled ? "bit-lnk"  : "bit-lnk-btn";
+        protected override string RootElementClass => "bit-lnk";
 
         protected virtual async Task HandleClick(MouseEventArgs e)
         {

@@ -1,13 +1,11 @@
 ﻿using Bunit;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
 namespace Bit.Client.Web.BlazorUI.Tests.SearchBoxes
 {
     [TestClass]
     public class BitSearchBoxTests : BunitTestContext
     {
-
         [DataTestMethod, DataRow("Search"), DataRow("Filter")]
         public void SearchBox_Placeholder_MeetEnteredValue(string componentPlaceholder)
         {
@@ -37,9 +35,9 @@ namespace Bit.Client.Web.BlazorUI.Tests.SearchBoxes
         {
             var component = RenderComponent<BitSearchBoxTest>(parameter =>
             parameter.Add(p => p.DisableAnimation, disableAnimation));
-            var searchBox = component.Find(".bit-sch-box-container");
+            var searchBox = component.Find(".bit-sch-box-fluent");
 
-            Assert.AreEqual(disableAnimation, searchBox.ClassList.Contains("no-animation"));
+            Assert.AreEqual(disableAnimation, searchBox.ClassList.Contains("bit-sch-box-no-animation-fluent"));
         }
 
         [DataTestMethod, DataRow(true), DataRow(false)]
@@ -47,9 +45,9 @@ namespace Bit.Client.Web.BlazorUI.Tests.SearchBoxes
         {
             var component = RenderComponent<BitSearchBoxTest>(parameter =>
             parameter.Add(p => p.IsUnderlined, isUnderlined));
-            var searchBox = component.Find(".bit-sch-box-container");
+            var searchBox = component.Find(".bit-sch-box-fluent");
 
-            Assert.AreEqual(isUnderlined, searchBox.ClassList.Contains("underlined"));
+            Assert.AreEqual(isUnderlined, searchBox.ClassList.Contains("bit-sch-box-underlined-fluent"));
         }
     }
 }
