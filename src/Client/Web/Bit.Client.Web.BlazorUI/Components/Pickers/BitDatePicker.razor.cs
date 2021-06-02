@@ -5,6 +5,7 @@ namespace Bit.Client.Web.BlazorUI
     public partial class BitDatePicker
     {
         [Parameter] public bool IsOpen { get; set; } = false;
+        [Parameter] public CalendarType CalendarType { get; set; } = CalendarType.Gregorian;
 
         protected override string RootElementClass { get; } = "bit-dtp";
 
