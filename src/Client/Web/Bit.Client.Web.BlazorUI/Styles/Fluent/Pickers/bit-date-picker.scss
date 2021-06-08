@@ -8,4 +8,24 @@
     margin: em(0px);
     padding: em(0px);
     box-sizing: border-box;
+
+    .bit-txt-focused-fluent {
+        border: em(1px) solid $Primary;
+    }
+
+    div:first-child {
+        font-family: FluentFont;
+        -webkit-font-smoothing: antialiased;
+        font-size: rem(14px);
+        font-weight: 400;
+        position: absolute;
+        box-sizing: border-box;
+        border-radius: em(2px);
+        box-shadow: #00000021 em(0px) em(6.4px) em(14.4px) em(0px), #0000001C em(0px) em(1.2px) em(3.6px) em(0px);
+        outline: transparent;
+        background-color: $White;
+        overflow: hidden auto;
+        position: relative;
+        border-radius: em(2px);
+    }
 }
