@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace Bit.Client.Web.BlazorUI
 {
@@ -7,7 +6,7 @@ namespace Bit.Client.Web.BlazorUI
     {
         private bool isRequired;
 
-        [Parameter] public string For { get; set; }
+        [Parameter] public string? For { get; set; }
 
         [Parameter]
         public bool IsRequired
@@ -20,7 +19,7 @@ namespace Bit.Client.Web.BlazorUI
             }
         }
 
-        [Parameter] public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment? ChildContent { get; set; }
 
         protected override string RootElementClass => "bit-lbl";
 

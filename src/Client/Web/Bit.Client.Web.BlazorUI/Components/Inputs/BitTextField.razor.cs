@@ -7,15 +7,20 @@ namespace Bit.Client.Web.BlazorUI
     public partial class BitTextField
     {
         private bool isMultiLine;
-        private bool isReadonly = false;
+        private bool isReadonly;
         private string focusClass = "";
         private TextFieldType type = TextFieldType.Text;
 
         [Parameter] public int MaxLength { get; set; } = -1;
 
-        [Parameter] public string Value { get; set; }
+        [Parameter] public string? IconName { get; set; }
 
-        [Parameter] public string Placeholder { get; set; }
+        [Parameter] public string? Value { get; set; }
+
+        [Parameter] public string? Placeholder { get; set; }
+
+        [Parameter]
+        public bool CanRevealPassword { get; set; }
 
         [Parameter]
         public bool IsReadonly
@@ -35,9 +40,12 @@ namespace Bit.Client.Web.BlazorUI
             set
             {
                 type = value;
+                ElementType = value;
                 ClassBuilder.Reset();
             }
         }
+
+        public TextFieldType ElementType { get; set; }
 
         [Parameter]
         public bool IsMultiLine
@@ -87,9 +95,8 @@ namespace Bit.Client.Web.BlazorUI
             ClassBuilder.Register(() => IsEnabled && IsReadonly
                                         ? $"{RootElementClass}-readonly-{VisualClassRegistrar()}" : string.Empty);
 
-            ClassBuilder.Register(() => string.IsNullOrWhiteSpace(FocusClass)
-                                        ? string.Empty
-                                        : $"{RootElementClass}-{FocusClass}-{VisualClassRegistrar()}");
+            ClassBuilder.Register(() => FocusClass.HasValue()
+                                        ? $"{RootElementClass}-{FocusClass}-{VisualClassRegistrar()}" : string.Empty);
         }
 
         protected virtual async Task HandleFocusIn(FocusEventArgs e)
@@ -149,6 +156,11 @@ namespace Bit.Client.Web.BlazorUI
             {
                 await OnClick.InvokeAsync(e);
             }
+        }
+
+        public void TogglePasswordRevealIcon()
+        {
+            ElementType = ElementType == TextFieldType.Text ? TextFieldType.Password : TextFieldType.Text;
         }
     }
 }

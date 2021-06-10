@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Bit.Client.Web.BlazorUI.Utils;
 using Microsoft.AspNetCore.Components;
 
 namespace Bit.Client.Web.BlazorUI
 {
-    public abstract class BitComponentBase : ComponentBase
+    public abstract partial class BitComponentBase : ComponentBase
     {
-        private string style;
         private Visual visual;
-        private string @class;
+        private string? style;
+        private string? @class;
         private bool isEnabled = true;
         private ComponentVisibility visibility;
 
-        protected bool Rendered { get; private set; } = false;
+        protected bool Rendered { get; private set; }
 
         private Guid _uniqueId = Guid.NewGuid();
 
@@ -35,7 +34,18 @@ namespace Bit.Client.Web.BlazorUI
         }
 
         [Parameter]
-        public string Class
+        public string? Style
+        {
+            get => style;
+            set
+            {
+                style = value;
+                StyleBuilder.Reset();
+            }
+        }
+
+        [Parameter]
+        public string? Class
         {
             get => @class;
             set
@@ -57,23 +67,14 @@ namespace Bit.Client.Web.BlazorUI
         }
 
         [Parameter]
-        public string Style
-        {
-            get => style;
-            set
-            {
-                style = value;
-                StyleBuilder.Reset();
-            }
-        }
-
-        [Parameter]
         public ComponentVisibility Visibility
         {
             get => visibility;
             set
             {
+                if (visibility == value) return;
                 visibility = value;
+                OnComponentVisibilityChanged(value);
                 StyleBuilder.Reset();
             }
         }
@@ -88,9 +89,9 @@ namespace Bit.Client.Web.BlazorUI
                                 string.Empty);
 
             ClassBuilder
+                .Register(() => RootElementClass)
                 .Register(() => $"{RootElementClass}-{VisualClassRegistrar()}")
-                .Register(() => IsEnabled ? $"{RootElementClass}-enabled-{VisualClassRegistrar()}" : $"{RootElementClass}-disabled-{VisualClassRegistrar()}")
-                .Register(() => RootElementClass);
+                .Register(() => $"{RootElementClass}-{(IsEnabled ? "enabled" : "disabled")}-{VisualClassRegistrar()}");
             RegisterComponentClasses();
             ClassBuilder.Register(() => Class);
 
@@ -100,41 +101,6 @@ namespace Bit.Client.Web.BlazorUI
         protected virtual string VisualClassRegistrar()
         {
             return Visual == Visual.Cupertino ? "cupertino" : Visual == Visual.Material ? "material" : "fluent";
-        }
-
-        public override Task SetParametersAsync(ParameterView parameters)
-        {
-            foreach (ParameterValue parameter in parameters)
-            {
-                switch (parameter.Name)
-                {
-                    case nameof(Visual):
-                        Visual = (Visual)parameter.Value;
-                        break;
-
-                    case nameof(Theme):
-                        Theme = (Theme)parameter.Value;
-                        break;
-
-                    case nameof(IsEnabled):
-                        IsEnabled = (bool)parameter.Value;
-                        break;
-
-                    case nameof(Style):
-                        Style = (string)parameter.Value;
-                        break;
-
-                    case nameof(Class):
-                        Class = (string)parameter.Value;
-                        break;
-
-                    case nameof(Visibility):
-                        Visibility = (ComponentVisibility)parameter.Value;
-                        break;
-                }
-            }
-
-            return base.SetParametersAsync(ParameterView.Empty);
         }
 
         protected override void OnAfterRender(bool firstRender)
@@ -155,6 +121,11 @@ namespace Bit.Client.Web.BlazorUI
 
         protected virtual void RegisterComponentClasses()
         {
+        }
+
+        protected virtual void OnComponentVisibilityChanged(ComponentVisibility visibility)
+        {
+
         }
     }
 }
