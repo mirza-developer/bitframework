@@ -1,11 +1,28 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Bit.Client.Web.BlazorUI
 {
     public partial class BitDatePicker
     {
-        [Parameter] public bool IsOpen { get; set; } = false;
+        private bool isOpen;
+
+        [Parameter]
+        public bool IsOpen
+        {
+            get => isOpen;
+            set
+            {
+                isOpen = value;
+                ClassBuilder.Reset();
+            }
+        }
+
+        [Parameter] public string GoToToday { get; set; } = "Go to today";
         [Parameter] public CalendarType CalendarType { get; set; } = CalendarType.Gregorian;
+
+        [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
         protected override string RootElementClass { get; } = "bit-dtp";
 
@@ -16,6 +33,12 @@ namespace Bit.Client.Web.BlazorUI
 
             ClassBuilder.Register(() => IsOpen is false
                 ? $"{RootElementClass}-open-{VisualClassRegistrar()}" : string.Empty);
+        }
+
+        public async Task HandleClick(MouseEventArgs eventArgs)
+        {
+            IsOpen = true;
+            await OnClick.InvokeAsync(eventArgs);
         }
     }
 }

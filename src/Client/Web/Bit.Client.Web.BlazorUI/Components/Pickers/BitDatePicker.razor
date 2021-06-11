@@ -5,12 +5,21 @@
      class="@ClassBuilder.Value">
     <BitTextField IsEnabled="IsEnabled"
                   IsMultiLine="false"
-                  IconName="CalendarMirrored">
+                  IconName="CalendarMirrored"
+                  OnClick="HandleClick"
+                  OnFocusOut="">
     </BitTextField>
     @if (IsOpen)
     {
         <div>
-
+            <div dialog="role">
+                <div></div>
+                <div></div>
+                <div>
+                    <div></div>
+                    <button type="button">@GoToToday</button>
+                </div>
+            </div>
         </div>
     }
 </div>
