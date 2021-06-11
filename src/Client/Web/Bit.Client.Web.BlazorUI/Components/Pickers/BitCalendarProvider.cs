@@ -59,5 +59,10 @@ namespace Bit.Client.Web.BlazorUI
             return false;
         }
 
+        public virtual bool CheckMonthIsLeap(int monthNumber)
+        {
+            return false;
+        }
+
     }
 }
