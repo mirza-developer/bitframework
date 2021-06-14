@@ -23,6 +23,8 @@ namespace Bit.Client.Web.BlazorUI
         [Parameter] public CalendarType CalendarType { get; set; } = CalendarType.Gregorian;
 
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+        [Parameter] public EventCallback<FocusEventArgs> OnFocusIn { get; set; }
+        [Parameter] public EventCallback<FocusEventArgs> OnFocusOut { get; set; }
 
         protected override string RootElementClass { get; } = "bit-dtp";
 
@@ -39,6 +41,15 @@ namespace Bit.Client.Web.BlazorUI
         {
             IsOpen = true;
             await OnClick.InvokeAsync(eventArgs);
+        }
+        public async Task HandleFocusIn(FocusEventArgs eventArgs)
+        {
+            await OnFocusIn.InvokeAsync(eventArgs);
+        }
+        public async Task HandleFocusOut(FocusEventArgs eventArgs)
+        {
+            IsOpen = false;
+            await OnFocusOut.InvokeAsync(eventArgs);
         }
     }
 }
