@@ -1,4 +1,5 @@
 ﻿@import "../colors.fluent.scss", "../../functions.scss";
+
 .bit-dtp {
     font-family: FluentFont;
     -webkit-font-smoothing: antialiased;
@@ -46,12 +47,108 @@
             animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
             animation-fill-mode: both;
 
-            div:first-child {
+            div:first-child { //left
                 box-shadow: none;
                 margin: em(0px);
                 padding: em(12px);
                 box-sizing: content-box;
                 width: em(196px);
+
+                div:first-child { //header 1
+                    position: relative;
+                    display: inline-flex;
+                    height: em(28px);
+                    line-height: em(44px);
+                    width: 100%;
+
+                    div:first-child { //month
+                        outline: transparent;
+                        position: relative;
+                        animation-name: opacity;
+                        animation-duration: 0.267s;
+                        animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+                        animation-fill-mode: both;
+                        align-items: center;
+                        font-size: em(14px);
+                        font-family: inherit;
+                        color: $Grey160;
+                        display: inline-block;
+                        flex-grow: 1;
+                        font-weight: 600;
+                        padding: em(0px) em(4px) em(0px) em(10px);
+                        border: none;
+                        background-color: transparent;
+                        border-radius: em(2px);
+                        line-height: em(28px);
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-align: left;
+                        text-overflow: ellipsis;
+
+                        span { //month-span
+                        }
+                    }
+
+                    div:nth-child(2) { //change-month
+                        display: inline-flex;
+                        align-self: flex-end;
+
+                        button:first-child {
+                            outline: transparent;
+                            position: relative;
+                            width: em(28px);
+                            height: em(28px);
+                            display: block;
+                            text-align: center;
+                            line-height: em(28px);
+                            font-size: em(12px);
+                            color: $Grey160;
+                            border-radius: em(2px);
+                            background-color: transparent;
+                            border: none;
+                            padding: em(0px);
+                            overflow: visible;
+
+                            i { //up
+                                display: inline-block;
+                                -webkit-font-smoothing: antialiased;
+                                font-style: normal;
+                                font-weight: normal;
+                                speak: none;
+                                //   font-family: FabricMDL2Icons-0;
+                            }
+                        }
+
+                        button:nth-child(2) {
+                            outline: transparent;
+                            position: relative;
+                            width: em(28px);
+                            height: em(28px);
+                            display: block;
+                            text-align: center;
+                            line-height: em(28px);
+                            font-size: em(12px);
+                            color: $Grey160;
+                            border-radius: em(2px);
+                            background-color: transparent;
+                            border: none;
+                            padding: em(0px);
+                            overflow: visible;
+
+                            i {
+                                display: inline-block;
+                                -webkit-font-smoothing: antialiased;
+                                font-style: normal;
+                                font-weight: normal;
+                                speak: none;
+                            }
+                        }
+                    }
+                }
+
+                div:nth-child(2) { //table-container
+                    padding-bottom: em(10px);
+                }
             }
 
             div:nth-child(2) {
@@ -142,6 +239,7 @@
         opacity: 1;
     }
 }
+
 @keyframes slideDown {
     0% {
         transform: translate3d(0,-10px,0);
@@ -150,5 +248,4 @@
     100% {
         transform: translate3d(0,0,0);
     }
-
 }
