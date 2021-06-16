@@ -48,7 +48,7 @@ namespace Bit.Client.Web.BlazorUI
         }
         public async Task HandleFocusOut(FocusEventArgs eventArgs)
         {
-            IsOpen = false;
+         //   IsOpen = false;
             await OnFocusOut.InvokeAsync(eventArgs);
         }
     }
