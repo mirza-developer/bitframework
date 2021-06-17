@@ -93,7 +93,7 @@
                         display: inline-flex;
                         align-self: flex-end;
 
-                        button:first-child {
+                        button:first-child { //up-previous
                             outline: transparent;
                             position: relative;
                             width: em(28px);
@@ -115,11 +115,10 @@
                                 font-style: normal;
                                 font-weight: normal;
                                 speak: none;
-                                //   font-family: FabricMDL2Icons-0;
                             }
                         }
 
-                        button:nth-child(2) {
+                        button:nth-child(2) { //down-next
                             outline: transparent;
                             position: relative;
                             width: em(28px);
@@ -135,7 +134,7 @@
                             padding: em(0px);
                             overflow: visible;
 
-                            i {
+                            i { //down
                                 display: inline-block;
                                 -webkit-font-smoothing: antialiased;
                                 font-style: normal;
@@ -148,10 +147,80 @@
 
                 div:nth-child(2) { //table-container
                     padding-bottom: em(10px);
+
+                    table {
+                        text-align: center;
+                        border-collapse: collapse;
+                        border-spacing: em(0px);
+                        table-layout: fixed;
+                        font-size: inherit;
+                        margin-top: em(4px);
+                        width: em(196px);
+                        position: relative;
+                        padding-bottom: em(10px);
+
+                        tbody {
+                            tr:first-child {
+                                th {
+                                    margin: em(0px);
+                                    padding: em(0px);
+                                    width: em(28px);
+                                    height: em(28px);
+                                    line-height: em(28px);
+                                    font-size: em(12px);
+                                    font-weight: 400;
+                                    color: $Grey160;
+                                    cursor: pointer;
+                                    position: relative;
+                                    animation-name: fadeIn;
+                                    animation-duration: 0.267s;
+                                    animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+                                    animation-fill-mode: both;
+                                }
+                            }
+
+                            tr:nth-child(n+1) {
+                                td {
+                                    border-bottom-left-radius: em(2px);
+                                    border-top-left-radius: em(2px);
+                                    border-top-right-radius: em(2px);
+                                    color: $Grey130;
+                                    font-weight: 400;
+                                    margin: em(0px);
+                                    padding: em(0px);
+                                    width: em(28px);
+                                    height: em(28px);
+                                    line-height: em(28px);
+                                    font-size: em(12px);
+                                    font-weight: 400;
+                                    color: $Grey160;
+                                    cursor: pointer;
+                                    position: relative;
+
+                                    button {
+                                        outline: transparent;
+                                        position: relative;
+                                        width: em(24px);
+                                        height: em(24px);
+                                        line-height: em(24px);
+                                        font-size: em(12px);
+                                        font-weight: inherit;
+                                        border-radius: em(2px);
+                                        border: none;
+                                        padding: em(0px);
+                                        color: inherit;
+                                        background-color: transparent;
+                                        cursor: pointer;
+                                        overflow: visible;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
-            div:nth-child(2) {
+            div:nth-child(2) { //div
                 top: em(0px);
                 border-right: em(1px) solid $Grey30;
                 border-top-color: $Grey30;
@@ -159,7 +228,7 @@
                 border-left-color: $Grey30;
             }
 
-            div:nth-child(3) {
+            div:nth-child(3) { //right
                 display: flex;
                 flex-direction: column;
 
