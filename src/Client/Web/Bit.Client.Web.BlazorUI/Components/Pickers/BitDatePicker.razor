@@ -1,44 +1,240 @@
 ﻿@namespace Bit.Client.Web.BlazorUI
 @inherits BitComponentBase
 <div @ref="RootElement"
-     style="@StyleBuilder.Value"
-     class="@ClassBuilder.Value">
-    <BitTextField IsEnabled="IsEnabled"
-                  IsMultiLine="false"
-                  IconName="CalendarMirrored"
-                  OnClick="HandleClick"
-                  OnFocusIn="HandleFocusIn"
-                  OnFocusOut="HandleFocusOut">
-    </BitTextField>
-    @if (IsOpen)
-    {
-        <div>
-            <div dialog="role">
-                <div class="left">
-                    <div class="header1">
-                        <div class="month">
-                            <span class="month-span"></span>
-                        </div>
-                        <div class="change-month">
-                            <button class="up-previous">
-                                <i class="up bit-icon"></i>
-                            </button>
-                            <button class="down-next">
-                                <i class="down bit-icon"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="table-container">
-                        <table class="weeks">
-                        </table>
-                    </div>
-                </div>
-                <div class="div"></div>
-                <div class="right">
-                    <div></div>
-                    <button type="button">@GoToToday</button>
-                </div>
-            </div>
-        </div>
-    }
+	 style="@StyleBuilder.Value"
+	 class="@ClassBuilder.Value">
+	<BitTextField IsEnabled="IsEnabled"
+				  IsMultiLine="false"
+				  IconName="CalendarMirrored"
+				  OnClick="HandleClick"
+				  OnFocusIn="HandleFocusIn"
+				  OnFocusOut="HandleFocusOut">
+	</BitTextField>
+	@if (IsOpen)
+	{
+	 <div>
+	  <div dialog="role">
+	   <div class="left">
+		<div class="header1">
+		 <div class="month">
+		  <span class="month-span"></span>
+		 </div>
+		 <div class="change-month">
+		  <button class="up-previous">
+		   <i class="up"></i>
+		  </button>
+		  <button class="down-next">
+		   <i class="down"></i>
+		  </button>
+		 </div>
+		</div>
+		<div class="table-container">
+		 <table class="weeks">
+		  <tbody class="tbody">
+		   <tr class="week-name">
+			<th>S</th>
+			<th>M</th>
+			<th>T</th>
+			<th>W</th>
+			<th>T</th>
+			<th>F</th>
+			<th>S</th>
+		   </tr>
+		   <tr class="week-1">
+			<td>
+			 <button>
+			  <span>30</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>31</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>1</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>2</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>3</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>4</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>5</span>
+			 </button>
+			</td>
+		   </tr>
+		   <tr class="week-2">
+			<td>
+			 <button>
+			  <span>6</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>7</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>8</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>8</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>9</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>10</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>11</span>
+			 </button>
+			</td>
+		   </tr>
+		   <tr class="week-3">
+			<td>
+			 <button>
+			  <span>12</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>13</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>14</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>15</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>16</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>17</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>18</span>
+			 </button>
+			</td>
+		   </tr>
+		   <tr class="week-4">
+			<td>
+			 <button>
+			  <span>19</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>20</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>21</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>22</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>23</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>24</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>25</span>
+			 </button>
+			</td>
+		   </tr>
+		   <tr class="week-5">
+			<td>
+			 <button>
+			  <span>26</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>27</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>28</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>29</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>30</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>31</span>
+			 </button>
+			</td>
+			<td>
+			 <button>
+			  <span>1</span>
+			 </button>
+			</td>
+		   </tr>
+		  </tbody>
+		 </table>
+		</div>
+	   </div>
+	   <div class="div"></div>
+	   <div class="right">
+		<div></div>
+		<button type="button">@GoToToday</button>
+	   </div>
+	  </div>
+	 </div>
+	}
 </div>
