@@ -82,18 +82,44 @@ namespace Bit.Client.Web.BlazorUI
             var firstDay = calendar.ToDateTime(year, month, 1, 0, 0, 0, 0);
             var currentDay = 1;
             var dayOfWeekDifference = CalendarType == CalendarType.Persian ? -1 : 0;
+            var isCalendarEnded = false;
             for (int weekIndex = 0; weekIndex < monthWeeks.GetLength(0); weekIndex++)
             {
-                for (int dayIndex = 0; dayIndex < monthWeeks.GetLength(1) && currentDay <= daysCount ; dayIndex++)
+                for (int dayIndex = 0; dayIndex < monthWeeks.GetLength(1); dayIndex++)
                 {
-                    if ((weekIndex == 0 
-                         && currentDay == 1 
-                         && (int)firstDay.DayOfWeek == dayIndex + dayOfWeekDifference) 
-                        || currentDay != 1)
+                    if (weekIndex == 0
+                        && currentDay == 1
+                        && (int)firstDay.DayOfWeek > dayIndex + dayOfWeekDifference)
+                    {
+                        var previousMonthDaysCount = 0;
+                        if (month - 1 == 0)
+                        {
+                            previousMonthDaysCount = calendar.GetDaysInMonth(year - 1, 12);
+                        }
+                        else
+                        {
+                            previousMonthDaysCount = calendar.GetDaysInMonth(year, month - 1);
+                        }
+                        monthWeeks[weekIndex, dayIndex] = previousMonthDaysCount - ((int)firstDay.DayOfWeek - (dayIndex + dayOfWeekDifference)) + 1;
+                    }
+                    else
                     {
                         monthWeeks[weekIndex, dayIndex] = currentDay;
                         currentDay++;
                     }
+                    if (currentDay > daysCount && dayIndex !=6)
+                    {
+                        currentDay = 1;
+                        isCalendarEnded = true;
+                    }
+                    if (dayIndex == 6)
+                    {
+                        break;
+                    }
+                }
+                if (isCalendarEnded)
+                {
+                    break;
                 }
             }
         }
