@@ -11,6 +11,8 @@ namespace Bit.Client.Web.BlazorUI
         private bool isOpen;
         private Calendar calendar;
         private int[,] monthWeeks = new int[6, 7];
+        private int currentYear;
+        private int currentMonth;
 
         [Parameter]
         public bool IsOpen
@@ -71,9 +73,9 @@ namespace Bit.Client.Web.BlazorUI
 
         private void CreateMonthCalendar()
         {
-            var month = calendar.GetMonth(DateTime.Now);
-            var year = calendar.GetYear(DateTime.Now);
-            CreateMonthCalendar(year, month);
+            currentMonth = calendar.GetMonth(DateTime.Now);
+            currentYear = calendar.GetYear(DateTime.Now);
+            CreateMonthCalendar(currentYear, currentMonth);
         }
 
         private void CreateMonthCalendar(int year, int month)

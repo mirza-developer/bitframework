@@ -236,6 +236,56 @@
                     box-sizing: content-box;
                     width: em(196px);
                     overflow: hidden;
+
+                    div:first-child { //header
+                        display: flex;
+
+                        button {
+                            outline: transparent;
+                            position: relative;
+                            font-size: px(14px);
+                            font-weight: 600;
+                            font-family: inherit;
+                            text-align: left;
+                            background-color: transparent;
+                            flex-grow: 1;
+                            padding: px(0px) px(4px) px(0px) px(10px);
+                            border: none;
+                            overflow: visible;
+                        }
+                    }
+
+                    div:nth-child(2) { //months-rows
+                        div { //role="grid"
+                            margin-top: em(4px);
+
+                            div { //role="row"
+                                margin-bottom: em(16px);
+
+                                button {
+                                    outline: transparent;
+                                    position: relative;
+                                    width: em(24px);
+                                    height: em(24px);
+                                    line-height: em(24px);
+                                    font-size: em(12px);
+                                    font-weight: inherit;
+                                    border-radius: em(2px);
+                                    border: none;
+                                    padding: em(0px);
+                                    color: inherit;
+                                    background-color: transparent;
+                                    cursor: pointer;
+                                    overflow: visible;
+
+                                    span {
+                                        height: inherit;
+                                        line-height: inherit;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 button {
