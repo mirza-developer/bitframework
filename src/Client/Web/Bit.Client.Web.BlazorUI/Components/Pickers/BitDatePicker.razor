@@ -64,8 +64,16 @@
                 <div class="div"></div>
                 <div class="right">
                     <div>
-                        <div>
-                            <button>@currentYear</button>
+                        <div class="header-year">
+                            <button type="button">@currentYear</button>
+                            <div class="">
+                                <button title="Go to previous year @(currentYear-1)" class="previous-year">
+                                    <i class="up"></i>
+                                </button>
+                                <button title="Go to previous year @(currentYear+1)" class="next-year">
+                                    <i class="down"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="months-rows">
                             <div role="grid">

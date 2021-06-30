@@ -253,6 +253,39 @@
                             border: none;
                             overflow: visible;
                         }
+
+                        div {
+                            display: flex;
+                            align-items: center;
+
+                            button {
+                                outline: transparent;
+                                position: relative;
+                                font-family: inherit;
+                                width: em(28px);
+                                min-width: em(28px);
+                                height: em(28px);
+                                min-height: em(28px);
+                                display: block;
+                                text-align: center;
+                                line-height: em(28px);
+                                font-size: em(12px);
+                                color: $Grey160;
+                                border-radius: em(2px);
+                                background-color: transparent;
+                                border: none;
+                                padding: em(0px);
+                                overflow: visible;
+
+                                i {
+                                    display: inline-block;
+                                    -webkit-font-smoothing: antialiased;
+                                    font-style: normal;
+                                    font-weight: normal;
+                                    speak: none;
+                                }
+                            }
+                        }
                     }
 
                     div:nth-child(2) { //months-rows
