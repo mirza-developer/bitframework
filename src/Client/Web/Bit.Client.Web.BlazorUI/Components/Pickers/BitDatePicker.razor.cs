@@ -31,6 +31,8 @@ namespace Bit.Client.Web.BlazorUI
         [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocusIn { get; set; }
         [Parameter] public EventCallback<FocusEventArgs> OnFocusOut { get; set; }
+        [Parameter] public EventCallback<int> OnMonthChange { get; set; }
+        [Parameter] public EventCallback<int> OnYearChange { get; set; }
 
         protected override string RootElementClass { get; } = "bit-dtp";
 
@@ -71,6 +73,50 @@ namespace Bit.Client.Web.BlazorUI
             await OnFocusOut.InvokeAsync(eventArgs);
         }
 
+        public async Task HandleMonthChanged(bool nextMonth)
+        {
+            if (nextMonth)
+            {
+                if (currentMonth + 1 == 0)
+                {
+                    currentYear++;
+                    currentMonth = 1;
+                }
+                else
+                {
+                    currentMonth++;
+                }
+            }
+            else
+            {
+                if (currentMonth - 1 == 0)
+                {
+                    currentYear--;
+                    currentMonth = 12;
+                }
+                else
+                {
+                    currentMonth--;
+                }
+            }
+            CreateMonthCalendar(currentYear, currentMonth);
+            await OnMonthChange.InvokeAsync(currentMonth);
+        }
+
+        public async Task HandleYearChanged(bool nextYear)
+        {
+            if (nextYear)
+            {
+                currentYear++;
+            }
+            else
+            {
+                currentYear--;
+            }
+            CreateMonthCalendar(currentYear, currentMonth);
+            await OnYearChange.InvokeAsync(currentYear);
+        }
+
         private void CreateMonthCalendar()
         {
             currentMonth = calendar.GetMonth(DateTime.Now);
@@ -109,7 +155,7 @@ namespace Bit.Client.Web.BlazorUI
                         monthWeeks[weekIndex, dayIndex] = currentDay;
                         currentDay++;
                     }
-                    if (currentDay > daysCount && dayIndex !=6)
+                    if (currentDay > daysCount && dayIndex != 6)
                     {
                         currentDay = 1;
                         isCalendarEnded = true;

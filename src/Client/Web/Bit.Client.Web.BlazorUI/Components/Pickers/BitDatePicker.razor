@@ -20,10 +20,10 @@
                             <span class="month-span"></span>
                         </div>
                         <div class="change-month">
-                            <button class="up-previous">
+                            <button class="up-previous" title="Go to previous month" @onclick="()=>HandleMonthChanged(false)">
                                 <i class="up"></i>
                             </button>
-                            <button class="down-next">
+                            <button class="down-next" title="Go to next month" @onclick="()=>HandleMonthChanged(true)">
                                 <i class="down"></i>
                             </button>
                         </div>
@@ -67,10 +67,14 @@
                         <div class="header-year">
                             <button type="button">@currentYear</button>
                             <div class="">
-                                <button title="Go to previous year @(currentYear-1)" class="previous-year">
+                                <button title="Go to previous year @(currentYear-1)" 
+                                        class="previous-year"
+                                        @onclick="()=>HandleYearChanged(false)">
                                     <i class="up"></i>
                                 </button>
-                                <button title="Go to previous year @(currentYear+1)" class="next-year">
+                                <button title="Go to previous year @(currentYear+1)" 
+                                        class="next-year"
+                                        @onclick="()=>HandleYearChanged(true)">
                                     <i class="down"></i>
                                 </button>
                             </div>
