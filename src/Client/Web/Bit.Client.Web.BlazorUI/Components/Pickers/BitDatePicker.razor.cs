@@ -13,6 +13,7 @@ namespace Bit.Client.Web.BlazorUI
         private int[,] monthWeeks = new int[6, 7];
         private int currentYear;
         private int currentMonth;
+        private string monthTitle = "July 2021";
 
         [Parameter]
         public bool IsOpen
