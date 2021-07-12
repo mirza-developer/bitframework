@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Bit.Client.Web.BlazorUI
 {
@@ -128,6 +129,51 @@ namespace Bit.Client.Web.BlazorUI
                         return "Bah";
                     case 12:
                         return "Esf";
+                }
+            }
+            return "";
+        }
+
+        public static string GetWeekDayName(this Calendar calendar,DayOfWeek dayOfWeek)
+        {
+            if (calendar is GregorianCalendar)
+            {
+                switch (dayOfWeek)
+                {
+                    case DayOfWeek.Sunday:
+                        return "Sunday";
+                    case DayOfWeek.Monday:
+                        return "Monday";
+                    case DayOfWeek.Tuesday:
+                        return "Tuesday";
+                    case DayOfWeek.Wednesday:
+                        return "Wednesday";
+                    case DayOfWeek.Thursday:
+                        return "Thursday";
+                    case DayOfWeek.Friday:
+                        return "Friday";
+                    case DayOfWeek.Saturday:
+                        return "Saturday";
+                }
+            }
+            if (calendar is PersianCalendar)
+            {
+                switch (dayOfWeek)
+                {
+                    case DayOfWeek.Sunday:
+                        return "Yekshanbe";
+                    case DayOfWeek.Monday:
+                        return "Doshanbe";
+                    case DayOfWeek.Tuesday:
+                        return "Seshanbe";
+                    case DayOfWeek.Wednesday:
+                        return "Chaharshanbe";
+                    case DayOfWeek.Thursday:
+                        return "Panjshanbe";
+                    case DayOfWeek.Friday:
+                        return "Jome'e";
+                    case DayOfWeek.Saturday:
+                        return "Shanbe";
                 }
             }
             return "";

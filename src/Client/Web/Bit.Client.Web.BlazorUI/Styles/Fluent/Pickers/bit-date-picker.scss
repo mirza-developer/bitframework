@@ -358,35 +358,32 @@
                                     }
                                 }
                             }
+                        }
 
-                            div:nth-child(2) { //months-rows
-                                div { //role="grid"
-                                    margin-top: em(4px);
+                        div:nth-child(2) { //months-rows
+                            div { //role="grid"
+                                margin-top: em(4px);
 
-                                    div { //role="row"
-                                        margin-bottom: em(16px);
+                                div { //role="row"
+                                    margin-bottom: em(16px);
 
-                                        button {
-                                            outline: transparent;
-                                            position: relative;
-                                            width: em(24px);
-                                            height: em(24px);
-                                            line-height: em(24px);
-                                            font-size: em(12px);
-                                            font-weight: inherit;
-                                            border-radius: em(2px);
-                                            border: none;
-                                            padding: em(0px);
-                                            color: inherit;
-                                            background-color: transparent;
-                                            cursor: pointer;
-                                            overflow: visible;
-
-                                            span {
-                                                height: inherit;
-                                                line-height: inherit;
-                                            }
-                                        }
+                                    button {
+                                        outline: transparent;
+                                        position: relative;
+                                        width: em(40px);
+                                        height: em(40px);
+                                        min-width: em(40px);
+                                        min-height: em(40px);
+                                        line-height: em(40px);
+                                        font-size: em(12px);
+                                        font-family: inherit;
+                                        padding: em(0px);
+                                        margin: em(0px) em(12px) em(0px) em(0px);
+                                        color: $Grey160;
+                                        background-color: transparent;
+                                        border: none;
+                                        border-radius: em(2px);
+                                        overflow: visible;
                                     }
                                 }
                             }

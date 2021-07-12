@@ -13,7 +13,7 @@ namespace Bit.Client.Web.BlazorUI
         private int[,] monthWeeks = new int[6, 7];
         private int currentYear;
         private int currentMonth;
-        private string monthTitle = "July 2021";
+        private string monthTitle = "";
 
         [Parameter]
         public bool IsOpen
@@ -57,6 +57,7 @@ namespace Bit.Client.Web.BlazorUI
                 calendar = new PersianCalendar();
             }
             CreateMonthCalendar();
+            monthTitle = $"{calendar.GetMonthName(currentMonth)} {currentYear}";
         }
 
         public async Task HandleClick(MouseEventArgs eventArgs)
